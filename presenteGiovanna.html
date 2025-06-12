@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Marcelo & Giovanna</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #1a1a1a, #330000);
+      color: white;
+      text-align: center;
+    }
+
+    header {
+      padding: 2rem 1rem;
+      background-color: #b3002d;
+      color: white;
+      font-family: 'Pacifico', cursive;
+      font-size: 2rem;
+    }
+
+    .contador {
+      font-size: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .carousel-container {
+      position: relative;
+      max-width: 600px;
+      margin: 2rem auto;
+      overflow: hidden;
+      border-radius: 1rem;
+      box-shadow: 0 4px 6px rgba(255, 0, 0, 0.2);
+      aspect-ratio: 3/4;
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .carousel-track img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      flex-shrink: 0;
+      border-radius: 1rem;
+    }
+
+    .carousel-buttons {
+      display: flex;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+
+    .carousel-buttons button {
+      background-color: #b3002d;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      margin: 0 0.5rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .mensagem {
+      padding: 2rem 1rem;
+      background-color: #260000;
+      border-radius: 1rem;
+      margin: 2rem;
+      font-size: 1.2rem;
+      line-height: 1.6;
+      color: #ffe6e6;
+    }
+
+    .audio {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 2rem auto;
+      padding: 1rem;
+    }
+
+    .audio-player {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      background-color: #1a1a1a;
+      padding: 1rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 12px rgba(255, 0, 0, 0.2);
+      max-width: 500px;
+    }
+
+    .audio-player img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 1rem;
+    }
+
+    .audio-player audio {
+      width: 300px;
+      max-width: 100%;
+      border-radius: 1rem;
+    }
+
+    footer {
+      font-size: 0.9rem;
+      padding: 1rem;
+      color: #999;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        font-size: 1.5rem;
+      }
+
+      .audio-player {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>Marcelo & Giovanna 💕</header>
+
+  <div class="contador">
+    <p>Juntos desde: <strong>09 de junho de 2024</strong></p>
+    <p>Estamos juntos há <span id="tempo-juntos"></span>.</p>
+  </div>
+
+  <div class="carousel-container">
+    <div class="carousel-track" id="carousel-track">
+      <img src="assets/1.jpeg" alt="Momento 1">
+      <img src="assets/2.jpeg" alt="Momento 2">
+      <img src="assets/3.jpeg" alt="Momento 3">
+      <img src="assets/4.jpeg" alt="Momento 4">
+      <img src="assets/5.jpeg" alt="Momento 5">
+      <img src="assets/6.jpeg" alt="Momento 6">
+    </div>
+  </div>
+  <div class="carousel-buttons">
+    <button onclick="moveSlide(-1)">&#10094; Anterior</button>
+    <button onclick="moveSlide(1)">Próximo &#10095;</button>
+  </div>
+
+  <div class="audio">
+    <div class="audio-player">
+      <img src="assets/capa-musica.jpg" alt="Capa da Música">
+      <audio controls>
+        <source src="musica.mp3" type="audio/mpeg">
+        Seu navegador não suporta o elemento de áudio.
+      </audio>
+    </div>
+  </div>
+
+  <div class="mensagem">
+    <p>Meu amor, para mim todos os dias ao seu lado são especiais. Você chegou na minha vida trazendo um grande amor.</p>
+    <p>Quero agradecer você por todo carinho. Que a nossa história continue com muito amor.</p>
+    <p><strong>Feliz Dia dos Namorados!</strong></p>
+  </div>
+
+  <footer>Feito com amor por Marcelo ❤️</footer>
+
+  <script>
+    const inicio = new Date("2024-06-09T00:00:00");
+    setInterval(() => {
+      const agora = new Date();
+      let diffMs = agora - inicio;
+
+      const totalSeconds = Math.floor(diffMs / 1000);
+      const totalDays = Math.floor(totalSeconds / (60 * 60 * 24));
+
+      let anos = Math.floor(totalDays / 365.25);
+      let meses = Math.floor((totalDays % 365.25) / 30.4375);
+      let dias = Math.floor((totalDays % 365.25) % 30.4375);
+
+      const horas = agora.getHours().toString().padStart(2, '0');
+      const minutos = agora.getMinutes().toString().padStart(2, '0');
+      const segundos = agora.getSeconds().toString().padStart(2, '0');
+
+      document.getElementById("tempo-juntos").innerText =
+        `${anos} anos, ${meses} meses, ${dias} dias, ${horas}h ${minutos}m ${segundos}s`;
+    }, 1000);
+
+    let slideIndex = 0;
+    const track = document.getElementById("carousel-track");
+    const slides = track.children;
+    const totalSlides = slides.length;
+
+    function moveSlide(step) {
+      slideIndex = (slideIndex + step + totalSlides) % totalSlides;
+      const width = slides[0].clientWidth;
+      track.style.transform = `translateX(-${slideIndex * width}px)`;
+    }
+  </script>
+</body>
+
+</html>
