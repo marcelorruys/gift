@@ -126,6 +126,34 @@
       color: #999;
     }
 
+    .tempo-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .tempo-box {
+    background-color: #330000;
+    border: 2px solid #b3002d;
+    color: #ffcccc;
+    padding: 1rem;
+    border-radius: 1rem;
+    min-width: 70px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
+    font-size: 1.5rem;
+  }
+
+  .tempo-box small {
+    display: block;
+    font-size: 0.8rem;
+    margin-top: 0.3rem;
+    color: #ffcdd2;
+  }
+
+
     @media (max-width: 600px) {
       header {
         font-size: 1.5rem;
@@ -143,7 +171,15 @@
   
   <div class="contador">
     <p>Juntos desde: <strong>09 de junho de 2024</strong></p>
-    <p>Estamos juntos há <span id="tempo-juntos"></span>.</p>
+    <p>Estamos juntos há:</p>
+    <div id="tempo-juntos" class="tempo-container">
+      <div class="tempo-box"><span id="anos">0</span><small>anos</small></div>
+      <div class="tempo-box"><span id="meses">0</span><small>meses</small></div>
+      <div class="tempo-box"><span id="dias">0</span><small>dias</small></div>
+      <div class="tempo-box"><span id="horas">00</span><small>h</small></div>
+      <div class="tempo-box"><span id="minutos">00</span><small>m</small></div>
+      <div class="tempo-box"><span id="segundos">00</span><small>s</small></div>
+    </div>
   </div>
   
   <div class="audio">
@@ -196,8 +232,13 @@
       const minutos = agora.getMinutes().toString().padStart(2, '0');
       const segundos = agora.getSeconds().toString().padStart(2, '0');
 
-      document.getElementById("tempo-juntos").innerText =
-        `${anos} anos, ${meses} meses, ${dias} dias, ${horas}h ${minutos}m ${segundos}s`;
+      document.getElementById("anos").innerText = anos;
+      document.getElementById("meses").innerText = meses;
+      document.getElementById("dias").innerText = dias;
+      document.getElementById("horas").innerText = horas;
+      document.getElementById("minutos").innerText = minutos;
+      document.getElementById("segundos").innerText = segundos;
+
     }, 1000);
 
     let slideIndex = 0;
